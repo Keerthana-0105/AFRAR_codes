@@ -3,3 +3,4 @@ Images/*.png
 Images/*.jpeg
 *.xlsx
 .env
+face_detection_test.py
