@@ -4,10 +4,12 @@ import os
 import numpy as np
 import pandas as pd
 from datetime import datetime
+from dotenv import load_dotenv
 
 # === Excel and Image Setup ===
 original_excel = "attendance.xlsx"
-image_folder = "Images"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+image_folder = os.path.join(script_dir, "Images")
 
 # Load base Excel sheet (assumed to have Registration Number, Name columns)
 df = pd.read_excel(original_excel, engine='openpyxl')
@@ -31,7 +33,8 @@ for filename in os.listdir(image_folder):
             print(f"⚠ Error with {filename}: {e}")
 
 # === Webcam Setup ===
-esp32_stream_url = "http://192.168.194.84:81/stream"
+load_dotenv()
+esp32_stream_url = os.getenv("URL")
 cap = cv2.VideoCapture(esp32_stream_url)
 # cap = cv2.VideoCapture(0)
 
