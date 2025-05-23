@@ -2,3 +2,4 @@ Images/*.jpg
 Images/*.png
 Images/*.jpeg
 *.xlsx
+.env

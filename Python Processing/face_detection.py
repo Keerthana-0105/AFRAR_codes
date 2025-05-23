@@ -2,13 +2,15 @@ import cv2
 import face_recognition
 import os
 import numpy as np
+from dotenv import load_dotenv
 
 # Load known faces and their filenames
 known_face_encodings = []
 known_face_names = []
 
 # Folder where student images are saved
-image_folder = "Images"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+image_folder = os.path.join(script_dir, "Images")
 
 # Load and encode faces from images in the folder
 for filename in os.listdir(image_folder):
@@ -21,7 +23,8 @@ for filename in os.listdir(image_folder):
             known_face_names.append(filename)
 
 # Open default webcam
-esp32_stream_url = "http://192.168.194.84:81/stream"
+load_dotenv()
+esp32_stream_url = os.getenv("URL")
 cap = cv2.VideoCapture(esp32_stream_url)
 #cap = cv2.VideoCapture(0)
 if not cap.isOpened():
